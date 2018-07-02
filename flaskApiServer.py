@@ -1,16 +1,18 @@
 from flask import Flask
 from flask_restful import Resource, Api
+from resources.poc import PoC
 
 app = Flask(__name__)
 api = Api(app)
 
-# Simple Get with a single parameter.
+
 class HelloWorld(Resource):
-    def get(self, cid):
-        return {'cid': cid}
+    def get(self):
+        return {'hello': 'world'}
 
 
-api.add_resource(HelloWorld, '/api/customer/<int:cid>')
+api.add_resource(HelloWorld, '/')
+api.add_resource(PoC, '/poc', '/poc/<cid>')
 
 if __name__ == '__main__':
     app.run(debug=True)
